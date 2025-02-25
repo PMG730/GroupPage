@@ -1,13 +1,14 @@
 import React from "react";
-
+ 
 function Group({ GroupData, index }) {
   const { name, description, leaders } = GroupData; // Assuming these keys from the fetched data
-
+ 
   return (
     <div className={`GroupContainer ${index % 2 !== 0 ? "dark" : ""}`}>
       <div>
         <h2>{name}</h2>
-        <p>{description}</p>
+        {/* Render the description as HTML content */}
+        <p dangerouslySetInnerHTML={{ __html: description }} />
       </div>
       <div>
         <p>Leader(s):</p>
@@ -25,5 +26,6 @@ function Group({ GroupData, index }) {
     </div>
   );
 }
-
+ 
 export default Group;
+ 
