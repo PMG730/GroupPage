@@ -5,6 +5,7 @@ import DropCampus from "../components/Campuses";
 import Group from "../components/Groups";
  
 function GroupsPage() {
+  const API_BASE_URL = process.env.REACT_APP_API_URL
   let [campuses, setCampuses] = useState([]);
   let [lifeGroups, setLifeGroups] = useState([]);
   let [day, setDay] = useState("");
@@ -49,7 +50,7 @@ function GroupsPage() {
  
   let GetCampusLocations = async (campus) => {
     try {
-      let response = await fetch("/api/v2/groups/categories/3/properties", {
+      let response = await fetch(`${API_BASE_URL}/api/v2/groups/categories/3/properties`, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -80,7 +81,7 @@ function GroupsPage() {
  
   let GetLifeGroupTypes = async (lifeGroup) => {
     try {
-      let response = await fetch("/api/v2/groups/categories/4/properties", {
+      let response = await fetch(`${API_BASE_URL}/api/v2/groups/categories/4/properties`, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -120,7 +121,7 @@ function GroupsPage() {
  
         // If neither campus nor life group is selected, fetch all groups
         if (!campusParam && !lifeGroupParam) {
-            const fetchResponse = await fetch("/api/v2/groups?selfRequest=1", {
+            const fetchResponse = await fetch(`${API_BASE_URL}/api/v2/groups?selfRequest=1`, {
                 method: "GET",
                 headers,
             });
@@ -135,7 +136,7 @@ function GroupsPage() {
             // Fetch groups by campus if campus is selected
             if (campusParam) {
                 const fetchCampusResponse = await fetch(
-                    `/api/v2/groups?propertyIds%5B%5D=${encodeURIComponent(campusParam)}&selfRequest=1`,
+                    `${API_BASE_URL}/api/v2/groups?propertyIds%5B%5D=${encodeURIComponent(campusParam)}&selfRequest=1`,
                     {
                         method: "GET",
                         headers,
@@ -149,7 +150,7 @@ function GroupsPage() {
             // Fetch groups by life group if life group is selected
             if (lifeGroupParam) {
                 const fetchLifeGroupResponse = await fetch(
-                    `/api/v2/groups?propertyIds%5B%5D=${encodeURIComponent(lifeGroupParam)}&selfRequest=1`,
+                    `${API_BASE_URL}/api/v2/groups?propertyIds%5B%5D=${encodeURIComponent(lifeGroupParam)}&selfRequest=1`,
                     {
                         method: "GET",
                         headers,
